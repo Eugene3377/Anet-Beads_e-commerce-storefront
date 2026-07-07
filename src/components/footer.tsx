@@ -1,0 +1,166 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import { FaFacebookF, FaSnapchatGhost } from "react-icons/fa";
+
+const Footer = () => {
+  const [dateTime, setDateTime] = useState<string>("");
+
+  useEffect(() => {
+    const updateDateTime = () => {
+      const now = new Date();
+      setDateTime(
+        now.toLocaleString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        })
+      );
+    };
+
+    updateDateTime();
+    const interval = setInterval(updateDateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <footer className="mt-8 sm:mt-12 mb-0 bg-background">
+      <div className="container mx-auto px-4">
+        {/* Logo + Contact & Info */}
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start justify-between">
+          {/* Brand with Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo.png"
+                alt="Anet Beads Logo"
+                width={60}
+                height={20}
+                className="h-auto w-auto max-w-[120px] sm:max-w-[140px]"
+                priority
+              />
+            </Link>
+          </div>
+
+          {/* Contact */}
+          <div className="flex-1">
+            <h4 className="font-semibold text-[18px] sm:text-[20px] py-2 sm:py-2 text-gray-900 dark:text-blue-400">
+              Contact Us
+            </h4>
+            <div className="flex items-center mb-3 sm:mb-4 text-gray-700 dark:text-gray-300">
+              <EmailIcon fontSize="small" />
+              <a
+                href="mailto:doreendaabbey@gmail.com"
+                className="ml-2 text-sm sm:text-base"
+              >
+                doreendaabbey@gmail.com
+              </a>
+            </div>
+            <div className="flex items-center mb-3 sm:mb-4 text-gray-700 dark:text-gray-300">
+              <PhoneIcon fontSize="small" />
+              <a
+                href="tel:+2330203900892"
+                className="ml-2 text-sm sm:text-base"
+              >
+                0203900892
+              </a>
+            </div>
+            <div className="flex items-center mb-3 sm:mb-4 text-gray-700 dark:text-gray-300">
+              <WhatsAppIcon fontSize="small" />
+              <a
+                href="https://wa.me/2330203900892"
+                className="ml-2 text-sm sm:text-base"
+              >
+                0203900892
+              </a>
+            </div>
+
+            <div className="flex items-center mb-3 sm:mb-4 text-gray-700 dark:text-gray-300">
+              <FaFacebookF size={18} />
+              <a
+                href="https://www.facebook.com/your-page"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 text-sm sm:text-base"
+              >
+                Nadia
+              </a>
+            </div>
+
+            <div className="flex items-center text-gray-700 dark:text-gray-300">
+              <FaSnapchatGhost size={20} />
+              <a
+                href="https://www.snapchat.com/add/nadiasbeads"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 text-sm sm:text-base"
+              >
+                Nadia
+              </a>
+            </div>
+          </div>
+
+          {/* Info */}
+          <div className="flex-1 sm:text-right mt-6 sm:mt-0">
+            <h4 className="font-semibold text-[18px] sm:text-[20px] py-2 sm:py-3 text-gray-900 dark:text-blue-400">
+              Information
+            </h4>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+              <li>
+                <Link href="/blog" className="hover:text-blue-400 transition">
+                  Blog Post (Coming Soon)
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/our-story"
+                  className="hover:text-blue-400 transition"
+                >
+                  Our Story
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms-and-conditions"
+                  className="hover:text-blue-400 transition"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className=" bg-white dark:bg-gray-900 w-full border-t border-gray-200 dark:border-gray-700 mt-6 sm:mt-8 py-3 sm:py-4 flex flex-col md:flex-row items-center justify-between px-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+        <div className="mb-2 md:mb-0 text-center md:text-left">
+          © {new Date().getFullYear()} Hollali — All rights reserved.
+        </div>
+        <div className="mb-2 md:mb-0 text-black dark:text-white font-medium text-center">
+          {dateTime}
+        </div>
+        <div className="text-center md:text-right">
+          <a
+            href="https://hollali.netlify.app/"
+            className="font-extrabold hover:text-blue-400 transition dark:text-blue-400"
+          >
+            Developed by Hollali
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
